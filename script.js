@@ -22,6 +22,26 @@ function addColorInPalette() {
       index
     ].style.backgroundColor = `rgb(${firstColor},${secondColor}, ${thirdColor})`;
   }
+
   colors[0].style.backgroundColor = 'black';
 }
 addColorInPalette();
+
+function clipeBoard() {
+  const boardDad = document.querySelector('#paint-clipboard');
+  const childBoardElement = document.createElement('div');
+  childBoardElement.id = 'pixel-board';
+
+  for (let index = 0; index < 5; index += 1) {
+    const lineBord = document.createElement('div');
+    for (let colunm = 0; colunm < 5; colunm += 1) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      lineBord.appendChild(pixel);
+    }
+    childBoardElement.appendChild(lineBord);
+  }
+  boardDad.appendChild(childBoardElement);
+}
+
+clipeBoard();
