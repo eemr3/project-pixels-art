@@ -22,7 +22,7 @@ function addColorInPalette() {
       index
     ].style.backgroundColor = `rgb(${firstColor},${secondColor}, ${thirdColor})`;
   }
-
+  colors[0].classList.add('selected');
   colors[0].style.backgroundColor = 'black';
 }
 addColorInPalette();
@@ -33,13 +33,15 @@ function clipeBoard() {
   childBoardElement.id = 'pixel-board';
 
   for (let index = 0; index < 5; index += 1) {
-    const lineBord = document.createElement('div');
+    const lineBoard = document.createElement('div');
+    lineBoard.classList.add('lineBoard');
     for (let colunm = 0; colunm < 5; colunm += 1) {
       const pixel = document.createElement('div');
       pixel.classList.add('pixel');
-      lineBord.appendChild(pixel);
+      pixel.style.backgroundColor = 'rgb(255,255,255)';
+      lineBoard.appendChild(pixel);
     }
-    childBoardElement.appendChild(lineBord);
+    childBoardElement.appendChild(lineBoard);
   }
   boardDad.appendChild(childBoardElement);
 }
