@@ -64,5 +64,11 @@ function getTargetPalette() {
     elementColorPalette[index].addEventListener('click', selectColorPalette);
   }
 }
-
 getTargetPalette();
+
+document.querySelector('#clear-board').addEventListener('click', () => {
+  const pixelsReset = document.querySelectorAll('.pixel');
+  for (let index = 0; index < pixelsReset.length; index += 1) {
+    pixelsReset[index].style.backgroundColor = 'rgb(255,255,255)';
+  }
+});
