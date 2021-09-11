@@ -25,21 +25,22 @@ function addColorInPalette() {
   colors[0].style.backgroundColor = 'black';
 }
 addColorInPalette();
+
 function getColorForPaintPixel(event) {
   const colorSelected = document.querySelector('.selected').style.backgroundColor;
   const eventClick = event.target;
   eventClick.style.backgroundColor = colorSelected;
 }
 
-function createClipeBoard() {
+function createClipeBoard(value) {
   const boardDad = document.querySelector('#paint-clipboard');
   const childBoardElement = document.createElement('div');
   childBoardElement.id = 'pixel-board';
 
-  for (let index = 0; index < 5; index += 1) {
+  for (let index = 0; index < value; index += 1) {
     const lineBoard = document.createElement('div');
     lineBoard.classList.add('lineBoard');
-    for (let colunm = 0; colunm < 5; colunm += 1) {
+    for (let colunm = 0; colunm < value; colunm += 1) {
       const pixel = document.createElement('div');
       pixel.classList.add('pixel');
       pixel.style.backgroundColor = 'rgb(255,255,255)';
@@ -50,7 +51,30 @@ function createClipeBoard() {
   }
   boardDad.appendChild(childBoardElement);
 }
-createClipeBoard();
+
+createClipeBoard(5);
+
+function setValueSizeInBoard() {
+  const inputValueSize = document.querySelector('#board-size');
+  const generateBboard = document.querySelector('#generate-board');
+
+  generateBboard.addEventListener('click', () => {
+    if (inputValueSize.value === '') {
+      return alert('Board inválido!');
+    } if (inputValueSize.value < 5) {
+      inputValueSize.value = 5;
+    } else if (inputValueSize.value > 50) {
+      inputValueSize.value = 50;
+    }
+    const boardPaint = document.querySelector('#paint-clipboard');
+    const line = document.querySelector('#pixel-board');
+    const valueSize = inputValueSize.value;
+    boardPaint.removeChild(line);
+
+    createClipeBoard(valueSize);
+  });
+}
+setValueSizeInBoard();
 
 function selectColorPalette(event) {
   const colorPalette = document.querySelector('.selected');
@@ -66,6 +90,7 @@ function getTargetPalette() {
 }
 getTargetPalette();
 
+// Botão para resetar o board
 document.querySelector('#clear-board').addEventListener('click', () => {
   const pixelsReset = document.querySelectorAll('.pixel');
   for (let index = 0; index < pixelsReset.length; index += 1) {
