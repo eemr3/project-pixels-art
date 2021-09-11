@@ -25,6 +25,11 @@ function addColorInPalette() {
   colors[0].style.backgroundColor = 'black';
 }
 addColorInPalette();
+function getColorForPaintPixel(event) {
+  const colorSelected = document.querySelector('.selected').style.backgroundColor;
+  const eventClick = event.target;
+  eventClick.style.backgroundColor = colorSelected;
+}
 
 function createClipeBoard() {
   const boardDad = document.querySelector('#paint-clipboard');
@@ -38,6 +43,7 @@ function createClipeBoard() {
       const pixel = document.createElement('div');
       pixel.classList.add('pixel');
       pixel.style.backgroundColor = 'rgb(255,255,255)';
+      pixel.addEventListener('click', getColorForPaintPixel);
       lineBoard.appendChild(pixel);
     }
     childBoardElement.appendChild(lineBoard);
