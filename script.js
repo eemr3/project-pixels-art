@@ -4,7 +4,6 @@ function createPaletteColor() {
   for (let index = 1; index < basePalette; index += 1) {
     const paletteC = document.createElement('div');
     paletteC.classList.add('color');
-
     containerPalette.appendChild(paletteC);
   }
 }
@@ -27,7 +26,7 @@ function addColorInPalette() {
 }
 addColorInPalette();
 
-function clipeBoard() {
+function createClipeBoard() {
   const boardDad = document.querySelector('#paint-clipboard');
   const childBoardElement = document.createElement('div');
   childBoardElement.id = 'pixel-board';
@@ -45,5 +44,19 @@ function clipeBoard() {
   }
   boardDad.appendChild(childBoardElement);
 }
+createClipeBoard();
 
-clipeBoard();
+function selectColorPalette(event) {
+  const colorPalette = document.querySelector('.selected');
+  colorPalette.classList.remove('selected');
+  event.target.classList.add('selected');
+}
+
+function getTargetPalette() {
+  const elementColorPalette = document.querySelectorAll('.color');
+  for (let index = 0; index < elementColorPalette.length; index += 1) {
+    elementColorPalette[index].addEventListener('click', selectColorPalette);
+  }
+}
+
+getTargetPalette();
